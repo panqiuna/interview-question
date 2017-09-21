@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面试题</title>
+    <style>
+        /*通配符选择器 选取所有的元素*/
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        /*   第一个
+           两边固定中间自适应
+           1.position方式：缺点：占据的空间稍大一些  相对于浏览器窗口进行定位
+                   .outer .div1 {
+                       position: fixed;
+                       left: 0;
+                       top: 0;
+                       width: 300px;
+                       background: yellow;
+                   }
+
+                   .outer .div2 {
+                       width: 100%;
+                       background: red;
+                   }
+
+                   .outer .div3 {
+                       position: fixed;
+                       width: 300px;
+                       right: 0;
+                       top: 0;
+                       background: yellow;
+                   }
+
+           2.float：优点：能让元素从文档中抽离出来 占据空间小  可以使元素的大小根据是口的大小进行编辑 IE6中有bug
+            .outer{
+                height: 200px;
+                width: 100%;
+            }
+            .outer div{
+                height: 100%;
+            }
+            .outer .div1,.outer .div3{
+                width: 300px;
+                background: yellow;
+            }
+            .div1{
+                float: left;
+            }
+            .div3{
+                float: right;
+            }
+           3.flex ie6-8不支持 兼容行不严谨 但使用方便
+            .outer {
+                display: flex;
+            }
+            .outer .div1{
+                width: 300px;
+                background: yellow;
+            }
+            .outer .div3{
+                width: 300px;
+                background: yellow;
+            }
+            .outer .div2{
+                text-align: center;
+                !*line-height: 100%;*!
+                background: lightblue;
+                flex: 1;
+            }
+           4.表单布局：其实这个就是根据table布局的特有的特点（td之和会填充满tr）而来的。
+             .outer {
+                 display: table;
+                 width: 100%;
+
+             }
+             .outer > div {
+                 display: table-cell;
+             }
+             .outer .div1, .outer .div3 {
+                 width: 300px;
+                 background: yellow;
+                 height: 500px;
+             }
+             .outer .div2 {
+                 text-align: center;
+                 line-height: 500px;
+                 height: 500px;
+                 background: lawngreen;
+             }
+           5.表格布局：处理一些复杂的布局能够得到更简单的解决
+            .outer{
+                width: 100%;
+                display: grid;
+                grid-template-columns:300px auto 300px;
+                grid-template-rows: 200px;
+            }
+            .outer .div1 ,.outer .div3{
+                width: 300px;
+                background: pink;
+            }
+            .outer .div2{
+                text-align: center;
+                line-height: 100px;
+                color: #fff;
+                background-color: orange;
+            }*/
+
+        /* !*第二个*!
+         !*左侧固定 右边自适应  给左边的元素用position：absolute 然后让右边的宽度自适应*!
+         .outer {
+             width: 100%;
+         }
+
+         .outer .left {
+             position: absolute;
+             width: 300px;
+             left: 0;
+             top: 0;
+             background: greenyellow;
+         }
+
+         .outer .right {
+             width: 100%;
+             background: pink;
+         }*/
+        /*!*css选择器 *!
+        !*id选择器*!
+        #oDiv {
+            width: 200px;
+            height: 180px;
+            background: palevioletred;
+        }
+
+        !*类选择器*!
+        .div1 {
+            width: 200px;
+            height: 180px;
+            background: peru;
+        }
+
+        !*标签选择器*!
+        !*div {*!
+        !*width: 100px;*!
+        !*height: 80px;*!
+        !*background: aqua;*!
+        !*}*!
+        !*并集选择器*!
+        .div1, .div2 {
+            font-size: 30px;
+            color: red;
+        }
+
+        !*兄弟选择器 只选择相邻的兄弟*!
+        .div2+ .div3{
+            width: 200px;
+            height: 200px;
+            background: #c9f071;
+        }
+
+        !*后代选择器*!
+        #oDiv p {
+            font-size: 40px;
+            color: blue;
+        }
+
+        !*属性选择器*!
+        [title=mm] {
+            border: 1px solid black;
+        }
+
+        !*子元素选器*!
+        .div2 > h5 {
+            color: #3b55ff;
+        }
+        !**!
+
+        !*过滤器*!
+        div:nth-of-type(4) {
+            background: cadetblue;
+        }
+        !*伪类选择器*!
+        !*鼠标滑过有样式*!
+        #oDiv:hover p{
+            color: #f0ad4e;
+        }
+        !*点击时有时样式*!
+        #oDiv a:active  {
+            color:yellow;
+        }
+        !*点击之后的样式*!
+        #oDiv a:visited{
+         color:darkolivegreen;
+        }
+        !*访问时有样式*!
+        #oDiv a:link{
+            color:palegreen;
+        }
+        !*获取同一类的元素*!
+        div:nth-of-type(5){
+            width: 50px;
+            height: 50px;
+            background: red;
+        }
+        !*同一属性里的第一个元素*!
+        div:first-of-type{
+            font-size: 30px;
+            color:green;
+        }
+        !*同一属性的最后一个元素*!
+        div:last-of-type{
+            width: 60px;
+            height: 60px;
+            background: teal;
+        }
+        !*选取元素里的每一个span*!
+        span:only-child{
+            font-size: 20px;
+            color: #00A000;
+        }*/
+
+   /*     清除浮动的方式
+        1.给父级设置适应的宽度或高度 优点：简单 代码少，容易理解  缺点：只适合宽高布局 要给出精确的高度，如果高度和宽度与父级div不一样时，会产生问题
+        2.使用clear:both; 在父级结束之前加上class="clear:both" 可以不用对父级设置高度 也无需技术父级高度，但会多加CSS和HTML标签 对页面有影响。 [优点：简单代码少，浏览器支持好 ，不容易出现其他问题；缺点：不容易理解原理 如果页面浮动布局多 就要增加很多空的div ]
+        3.overflow: hidden  优点是可以很少CSS代码即可解决浮动产生。 属性相当于是让父级紧贴内容，这样即可紧贴其对象内内容（包括使用float的div盒子），从而实现了清除浮动  离开了这个元素所在的区域以后会被隐藏; [优点：代码少 浏览器支持  缺点：不能和position匹配使用 因为超出的尺寸会被隐藏]
+        4.使用伪类:after和zoom 优点:浏览器支持好 不容易出现其他问题  缺点：代码多 不容易理解 只有结合两个代码时，才能让那个主流浏览器支持
+
+        .outer{
+
+            width: 100%;
+        }
+        .list{
+            list-style:none;
+        }
+        .list li{
+            float: left;
+            width: 100px;
+            height: 100px;
+            background: rebeccapurple;
+        }
+        .list .clearfix:before, .list .clearfix:after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .clearfix {
+
+            zoom: 1;
+
+        }*/
+    </style>
+</head>
+<body>
+<!--两边固定中间自适应
+<div class="outer">
+    <div class="div1 fl">1</div>
+    <div class="div2">2</div>
+    <div class="div3 fl2">3</div>
+</div>-->
+
+<!--&lt;!&ndash;第二个&ndash;&gt;
+<div class="outer">
+    <div class="left">qq</div>
+    <div class="right">nn</div>
+</div>-->
+<!--CSS选择器又哪些？有哪些新特性？有哪些伪类？-->
+<!--
+<div id="oDiv">5
+
+    <a href="http://www.baidu.com">激活样式</a>
+    <p>55</p>
+    <p title="mm">二货</p>
+
+</div>
+<div class="div1">5</div>
+<div class="div2">
+    <h5>哈哈</h5>
+    <h5>哈哈</h5>
+</div>
+<span>ppp</span>
+<div class="div3">5</div>
+<div>5</div>
+<div>5</div>
+&lt;!&ndash;css 新增的属性 多背景 rgba 多多栏布局（flex）&ndash;&gt;
+-->
+
+<!--清除浮动的方式-->
+<!--<div class="outer">
+    <ul class="list">
+        <li class="">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li class="lis clearfix"></li>
+    </ul>
+</div>-->
+
+
+
+<script>
+</script>
+</body>
+</html>

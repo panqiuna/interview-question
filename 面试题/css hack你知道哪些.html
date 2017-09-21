@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css hack你知道哪些</title>
+    <style>
+        .p1 {background-color: #FCE38A; width: 200px; height: 100px;}
+        .p2 {background-color: #EAFFD0; width: 200px; height: 100px;}
+        .p3 {background-color: #95E1D3; width: 200px; height: 100px;}
+    </style>
+</head>
+<body>
+<!--
+css hack是：因浏览器的不同版本 ，对css的支持，理解是不同的 导致在不同的浏览器的环境中呈现出不痛的效果 ，为了获取同一的页面效果 就需要针对浏览器不同的版本写特定的css样式，这个过程就是css hack
+css hack 的原理：就是根据不同的浏览器和不同浏览器的版本情况设置不同的css hack
+CSS hack分类:
+1.css属性前缀法：IE6能识别下划线"_"和星号" * "，IE7能识别星号" * "，但不能识别下划线"_"，IE6~IE10都认识"\9"，但firefox前述三个都不能认识。
+2.选择器前缀法：选择符级Hack：比如IE6能识别*html .class{}，IE7能识别*+html .class{}或者*:first-child+html .class{}。
+3.IE条件注释法(html 头部引用if ie)：IE条件注释Hack：IE条件注释是微软从IE5开始就提供的一种非标准逻辑语句。比如针对所有IE：<!–[if IE]><!–您的代码–><![endif]–>，针对IE6及以下版本：<!–[if lt IE 7]><!–您的代码–><![endif]–>，这类Hack不仅对CSS生效，对写在判断语句里面的所有代码都 会生效。
+css hack主要用在IE浏览器不同版本之间的表现差异而引入的
+
+1、Firefox
+
+@-moz-document url-prefix() { .selector { property: value; } }
+上面是仅仅被Firefox浏览器识别的写法，具体如：
+
+@-moz-document url-prefix() { .demo { color:lime; } }
+支持Firefox的还有几种写法：
+
+/* 支持所有firefox版本 */ #selector[id=selector] { property: value; } 或者： @-moz-document url-prefix() { .selector { property: value; } } /* 支持所有Gecko内核的浏览器 (包括Firefox) */ *>.selector { property: value; }
+
+2、Webkit枘核浏览器(chrome and safari)
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { Selector { property: value; } }
+上面写法主要是针对Webkit内核的浏览器，如Google Chrome 和 Safari浏览器：
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { .demo { color: #f36; } }
+
+3、Opera浏览器
+
+html:first-child>body Selector {property:value;} 或者： @media all and (min-width:0) { Selector {property: value;} } 或者： @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) { head~body Selector { property: value; } }
+
+上面则是Opera浏览器的Hack写法：
+
+@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) { head~body .demo { background: green; } }
+
+4、IE9浏览器
+
+:root Selector {property: value9;}
+上面是IE9的写法，具体应用如下：
+
+:root .demo {color: #ff09;}
+
+5、IE9以及IE9以下版本
+
+Selector {property:value9;}
+这种写法只有IE9以及IE9以下版本能识别，这里需要注意此处“9”只能是“9”不能是别的，比如说“8”，不然会失去效果的，如：
+
+.demo {background: lime9;}
+-->
+
+<!--盒模型
+&lt;!&ndash;
+标准盒模型：标准盒模型的宽高是内容的宽高，
+IE盒模型：IE盒模型的宽高是内容+padding+border的值
+&ndash;&gt;
+&lt;!&ndash;2.如何设置两种模式
+浏览器的默认模式是 content-box(标准默认)
+通过改变样式box-sizing来切换content-box(标准模式)和border-sizing(IE模式)
+&ndash;&gt;
+&lt;!&ndash;js如何设置获取盒模型对应的宽和高
+有四种方法；
+第一种：dom.style.width/height
+缺点：只能获取内联样式中的style值
+第二种：document.currentStyle.width/height
+缺点：只能获取IE浏览器的值 兼容性不好
+第三种：window.getComputerStyle(document).width/height
+缺点：只能用来获取不能用来设置改变值
+第四种：document.getBoundingClintRect().width/height
+优点：documentgetBoundingClientRect()获取一个矩形对象，其中包括top,left,right,bottom4个属性，以及返回的注意（IE盒子模型的宽高）。
+&ndash;&gt;
+&lt;!&ndash;3.什么是优雅降级和渐进增强?
+渐进增强 progressive enhancement：针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。
+
+　　优雅降级 graceful degradation：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
+
+　　区别：优雅降级是从复杂的现状开始，并试图减少用户体验的供给，而渐进增强则是从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要。降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带。
+&ndash;&gt;
+
+&lt;!&ndash;
+渐进增强的例子：
+　　transition属性，用于在某个数值属性突然改变的时候，在一定时间段里面输出中间的值，类似于jQuery.animate实现的动态效果。
+&ndash;&gt;
+
+&lt;!&ndash;优雅降级的例子&ndash;&gt;
+&lt;!&ndash;
+优雅降级需要正确地体现HTML标签的语义，符合“浏览器的预期”。让你的网页在各种情况—下——包括降级（javascript被禁用，css传输失败等等）的情形都可以运作良好。这是我理解的优雅降级的意义。
+&ndash;&gt;
+        <form>
+    　　<input type="text">
+    　　<input type="submit">
+    　　</form>-->
+
+<!--
+对BFC的了解
+BFC就是一个独立的盒子，并且与这个独立盒子里的布局不受外部影响，当然它也不会影响到外面的元素。
+自动创建一个BFC来对整个页面进行布局，在没有创建一个新的BFC的时候，整个文档就这一个BFC。
+BFC:的规则：
+内部的box会在垂直方向，从顶部开始一个接着一个地放置（上面的例子可以看出）
+
+同一个BFC中，在两个相邻的块级元素中，垂直margin会发生折叠
+
+每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)，即使存在浮动也是如此
+如何创建BFC?
+1.float的值不为”none” (如：float:left/right)
+overflow的值不为”visible”(如：overflow:hidden)
+2.display的值为 “table-cell”, “table-caption”, or “inline-block”中的任何一个
+3.position的值不为 “static” 或 “relative”中的任何一个(如：position:absolute)
+bfc的应用场景
+1.在支持BFC的浏览器（IE8+，firefox，chrome，safari）通过创建新的BFC闭合浮动；
+2.在不支持 BFC的浏览器 （IE6-7），通过触发 hasLayout 闭合浮动。
+<p class="p1">p1</p>
+<p class="p2">p2</p>
+<p class="p3">p3</p>
+-->
+<!---->
+</body>
+</html>

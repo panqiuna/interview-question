@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片如何实现垂直居中</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*vertical-align:middle;设置垂直居中
+        直接给父级盒子一个设置垂直居中让img继承父级
+
+        */
+        /*方法一*/
+    .div1{
+        display: table-cell;
+        vertical-align: middle;
+        width:500px;
+        height:500px;
+        border: 1px solid #000;
+
+    }
+        .div1 img{
+            display: block;
+            width: 100px;
+            height: 100px;
+        }
+
+
+        /*vertical-align:middle是将当前元素放在父元素的中间，大致一读，似乎是那么回事，但是细细一想，不知道具体指什么，概念模糊。我们从简单的开始，一步一步探究生效的原理。*/
+    </style>
+</head>
+<body>
+<div class="div1">
+    <img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1891064581,255096779&fm=5" alt="">
+</div>
+</body>
+</html>
